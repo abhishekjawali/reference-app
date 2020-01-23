@@ -8,7 +8,7 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (product_id, product_name, product_company, product_category) VALUES
-  (1, 'iPhoneXS', 'Apple', 'Mobile Phones'),
+  (1, 'iPhoneXS', 'Apple', 'Smart Phone'),
   (2, 'iPhoneXR', 'Apple', 'Mobile Phones'),
   (3, 'Galaxy S10', 'Samsung', 'Mobile Phones'),
   (4, 'Latitude', 'Dell', 'Laptop');

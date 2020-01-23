@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: product-app
-          image: abhishekjv/product-service:latest
+          image: abhishekjv/product-service:v1
           imagePullPolicy: Always
 ---
 apiVersion: v1
@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
         - name: rating-app
-          image: abhishekjv/rating-service:latest
+          image: abhishekjv/rating-service:v1
           imagePullPolicy: Always
 ---
 apiVersion: v1
@@ -78,7 +78,7 @@ spec:
     spec:
       containers:
         - name: composite-app
-          image: abhishekjv/composite-service:latest
+          image: abhishekjv/composite-service:v1
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: k8s
@@ -97,4 +97,21 @@ spec:
       nodePort: 30090
   type: NodePort
 ---
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-app-v2
+spec:
+  selector:
+    matchLabels:
+      app: product-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: product-app
+    spec:
+      containers:
+        - name: product-app
+          image: abhishekjv/product-service:v2
+          imagePullPolicy: Always
