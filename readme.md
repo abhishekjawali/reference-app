@@ -14,7 +14,6 @@ This app has 3 services:
 
 The high level architecture of this application is as follows:
 
-<< INSERT DIAGRAM >>
 ![Application Architecture](ReferenceAppArchitecture.png)
 
 - All 3 services are implemented in Spring Boot 2.
