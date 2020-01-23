@@ -14,7 +14,7 @@ This app has 3 services:
 
 The high level architecture of this application is as follows:
 
-![Application Architecture](ReferenceAppArchitecture.jpg)
+![Application Architecture](ReferenceAppArchitecture.png)
 
 - All 3 services are implemented in Spring Boot 2.
 - Product service and Rating service are using in-memory H2 database. The data scripts are in the resources folder. (Note: data.sql is automatically picked up by Spring JPA and loaded to DB)
@@ -101,4 +101,5 @@ curl localhost:9093/product/1 | jq .
 1. To run the same application in Kubernetes cluster
 2. To use Istio for traffic management, MASSL and telemetry
 3. To use Ambassador gateway
-   Refer to [Kubernetes Manifests folder to run in Kubernetes](./kubernetes-maniests)
+
+Refer to [Kubernetes Manifests folder](./kubernetes-maniests) to run in Kubernetes
