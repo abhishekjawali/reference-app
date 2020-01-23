@@ -1,0 +1,100 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-app
+spec:
+  selector:
+    matchLabels:
+      app: product-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: product-app
+    spec:
+      containers:
+        - name: product-app
+          image: abhishekjv/product-service:latest
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-app-service
+spec:
+  selector:
+    app: product-app
+  ports:
+    - name: http
+      port: 8080
+      #nodePort: 30080
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rating-app
+spec:
+  selector:
+    matchLabels:
+      app: rating-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rating-app
+    spec:
+      containers:
+        - name: rating-app
+          image: abhishekjv/rating-service:latest
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rating-app-service
+spec:
+  selector:
+    app: rating-app
+  ports:
+    - name: http
+      port: 8080
+      #nodePort: 30081
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: composite-app
+spec:
+  selector:
+    matchLabels:
+      app: composite-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: composite-app
+    spec:
+      containers:
+        - name: composite-app
+          image: abhishekjv/composite-service:latest
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+          imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: composite-app-service
+spec:
+  selector:
+    app: composite-app
+  ports:
+    - name: http
+      port: 8080
+      nodePort: 30090
+  type: NodePort
+---
+

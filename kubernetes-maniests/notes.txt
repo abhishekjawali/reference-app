@@ -1,0 +1,14 @@
+# this will compile code and push to docker repo
+# export the tag variables
+export PRODUCT_SERVICE_TAG=abhishekjv/product-service
+export RATING_SERVICE_TAG=abhishekjv/rating-service
+export COMPOSITE_SERVICE_TAG=abhishekjv/composite-service
+mvn compile jib:build
+
+minikube ip
+
+curl <MINIKUBE_IP>:<NODE_PORT>/CONTEXT-PATH
+
+curl 192.168.99.101:30081/rating/product/1
+
+curl 192.168.99.101:30082/product/1 | jq .
