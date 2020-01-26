@@ -12,3 +12,5 @@ curl <MINIKUBE_IP>:<NODE_PORT>/CONTEXT-PATH
 curl 192.168.99.101:30081/rating/product/1
 
 curl 192.168.99.101:30082/product/1 | jq .
+
+kubectl label namespace default istio-injection=enabled
