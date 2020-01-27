@@ -14,3 +14,12 @@ curl 192.168.99.101:30081/rating/product/1
 curl 192.168.99.101:30082/product/1 | jq .
 
 kubectl label namespace default istio-injection=enabled
+
+
+kubectl create secret generic mysql-root-pass --from-literal=password=P@ssword --dry-run -o yaml > root-pass.yaml
+
+kubectl create secret generic mysql-user-pass --from-literal=username=abhi --from-literal=password=abhi --dry-run -o yaml > user-pass.yaml
+
+kubectl create secret generic mysql-db-url --from-literal=database=testdb --from-literal=url='jdbc:mysql://reference-app-mysql:3306/testdb?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false' --dry-run -o yaml > url.yaml
+
+kubectl create configmap product-service-cm --from-env-file=product-service.properties --dry-run -o yaml
