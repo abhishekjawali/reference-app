@@ -18,4 +18,10 @@ public class CompositeController {
 		CompositeProduct product = compositeService.getProductById(productId);
 		return new ResponseEntity<CompositeProduct>(product, HttpStatus.OK);
 	}
+	
+	@GetMapping(path = "/healthz")
+	public ResponseEntity<String> healthz() {
+
+		return new ResponseEntity<String>("App is running!", HttpStatus.OK);
+	}
 }
