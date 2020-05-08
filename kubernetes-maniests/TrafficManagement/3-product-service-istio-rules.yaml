@@ -1,0 +1,34 @@
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: product-service-routing-rules # "just" a name for this virtualservice
+  namespace: default
+spec:
+  hosts:
+    - product-service.default.svc.cluster.local # The Service DNS (ie the regular K8S Service) name that we're applying routing rules to.
+  http:
+    - route:
+        - destination:
+            host: product-service.default.svc.cluster.local # The Target DNS name
+            subset: safe-group # The name defined in the DestinationRule
+          weight: 90
+        - destination:
+            host: product-service.default.svc.cluster.local # The Target DNS name
+            subset: risky-group # The name defined in the DestinationRule
+          weight: 10
+---
+kind: DestinationRule # Defining which pods should be part of each subset
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: product-service-canary-release-dr # This can be anything you like.
+  namespace: default
+spec:
+  host: product-service # Service
+  #trafficPolicy: ~
+  subsets:
+    - labels: # SELECTOR.
+        version: stable # find pods with label "safe"
+      name: safe-group
+    - labels:
+        version: new
+      name: risky-group
