@@ -11,6 +11,8 @@ public class CompositeProduct {
 	private String productCategory;
 
 	private Integer rating;
+	
+	private String productDescription;
 
 	public Integer getProductId() {
 		return productId;
@@ -50,5 +52,13 @@ public class CompositeProduct {
 
 	public void setRating(Integer rating) {
 		this.rating = rating;
+	}
+
+	public String getProductDescription() {
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
 }

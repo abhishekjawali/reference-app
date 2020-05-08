@@ -9,6 +9,8 @@ public class Products {
 	private String productCompany;
 
 	private String productCategory;
+	
+	private String productDescription;
 
 	public Integer getProductId() {
 		return productId;
@@ -40,6 +42,14 @@ public class Products {
 
 	public void setProductCategory(String productCategory) {
 		this.productCategory = productCategory;
+	}
+
+	public String getProductDescription() {
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
 
 }

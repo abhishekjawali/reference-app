@@ -42,6 +42,7 @@ public class CompositeServiceImpl implements CompositeService {
 		compositeProduct.setProductCompany(product.getProductCompany());
 		compositeProduct.setProductCategory(product.getProductCategory());
 		compositeProduct.setProductName(product.getProductName());
+		compositeProduct.setProductDescription(product.getProductDescription());
 		compositeProduct.setRating(rating.getRating());
 		return compositeProduct;
 	}
