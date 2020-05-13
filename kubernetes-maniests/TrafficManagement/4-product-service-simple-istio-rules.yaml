@@ -1,0 +1,13 @@
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: product-service-routing-rules # "just" a name for this virtualservice
+  namespace: default
+spec:
+  hosts:
+    - product-service.default.svc.cluster.local # The Service DNS (ie the regular K8S Service) name that we're applying routing rules to.
+  http:
+    - route:
+        - destination:
+            host: product-service.default.svc.cluster.local # The Target DNS name
+
