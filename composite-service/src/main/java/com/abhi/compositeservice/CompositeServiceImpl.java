@@ -16,10 +16,10 @@ public class CompositeServiceImpl implements CompositeService {
 
 	@Autowired
 	RestTemplate restTemplate;
-	
+
 	@Value("${product.service.url}")
 	private String productServiceUri;
-	
+
 	@Value("${rating.service.url}")
 	private String ratingServiceUri;
 
@@ -30,12 +30,17 @@ public class CompositeServiceImpl implements CompositeService {
 		HttpEntity<String> entity = new HttpEntity<String>(headers);
 
 		Products product = restTemplate
-				.exchange(productServiceUri+"/product/" + productId, HttpMethod.GET, entity, Products.class)
+				.exchange(productServiceUri + "/product/" + productId, HttpMethod.GET, entity, Products.class)
 				.getBody();
+		Ratings rating = null;
 
-		Ratings rating = restTemplate
-				.exchange(ratingServiceUri+"/rating/product/" + productId, HttpMethod.GET, entity, Ratings.class)
-				.getBody();
+		try {
+			rating = restTemplate
+					.exchange(ratingServiceUri + "/rating/product/" + productId, HttpMethod.GET, entity, Ratings.class)
+					.getBody();
+		} catch (Exception e) {
+			rating = null;
+		}
 
 		CompositeProduct compositeProduct = new CompositeProduct();
 		compositeProduct.setProductId(productId);
@@ -43,7 +48,8 @@ public class CompositeServiceImpl implements CompositeService {
 		compositeProduct.setProductCategory(product.getProductCategory());
 		compositeProduct.setProductName(product.getProductName());
 		compositeProduct.setProductDescription(product.getProductDescription());
-		compositeProduct.setRating(rating.getRating());
+		if (null != rating)
+			compositeProduct.setRating(rating.getRating());
 		return compositeProduct;
 	}
 
